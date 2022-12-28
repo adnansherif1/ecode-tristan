@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # from routes.v1.iris_predict import app_iris_predict_v1
 # from routes.home import app_home
 import json
+import nltk
 # import jsonify
 from schema import DataInput, PredictionResponse
 from classifier import select_and_classify, model
@@ -22,6 +23,7 @@ app.add_middleware(
 
 @app.on_event('startup')
 async def load_model():
+    nltk.download('stopwords')
     model.clf = pickle.load(open("classifier.sav", 'rb'))
     model.clf_sel = pickle.load(open("classifier_sel.sav", 'rb'))
     model.td = pickle.load(open("td.sav", 'rb'))
