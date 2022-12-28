@@ -24,6 +24,7 @@ app.add_middleware(
 @app.on_event('startup')
 async def load_model():
     nltk.download('stopwords')
+    nltk.download('wordnet')
     model.clf = pickle.load(open("classifier.sav", 'rb'))
     model.clf_sel = pickle.load(open("classifier_sel.sav", 'rb'))
     model.td = pickle.load(open("td.sav", 'rb'))
