@@ -9,10 +9,11 @@ ENV MODULE_NAME=app
 
 RUN apt update
 RUN apt-get install -y git
+RUN git clone https://github.com/adnansherif1/ecode-tristan.git /app
+RUN pip install -r requirements.txt
+RUN rm -rf /root/.cache
 
-
-CMD git clone $repo /app && pip install -r requirements.txt \    
-    && rm -rf /root/.cache && uvicorn app:app --host 0.0.0.0 --port 80  
+CMD uvicorn app:app --host 0.0.0.0 --port 3000  
     
 # RUN git clone https://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@github.com/adnansherif1/ecode-tristan.git /app && pip install -r requirements.txt && rm -rf /root/.cache
 

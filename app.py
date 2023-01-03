@@ -9,6 +9,7 @@ from schema import DataInput, PredictionResponse
 from classifier import select_and_classify, model
 import pickle
 
+
 app = FastAPI(title="Autofiller", description="API for autofilling AI", version="1.0")
 
 origins = ["*"]
@@ -46,4 +47,9 @@ async def get_prediction(data_input: DataInput):
     
     out = select_and_classify(html,user_data,model.labels,model.unique,model.category,model.td,
                                model.clf,model.td_sel,model.clf_sel)
-    return out
+    return {"out":out}
+
+@app.get('/hello',tags=["hello"],response_model=PredictionResponse,description="hello world")
+async def get_prediction():
+
+    return {"out":"Hello world"}
